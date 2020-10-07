@@ -32,8 +32,7 @@ class _TracksState extends State<Tracks> {
     // getting all songs available on device storage
     songs = await audioQuery.getSongs();
     // getting all albumart available on device storage
-    art = await audioQuery.getArtwork(type: ResourceType.ALBUM, id: album.id);
-    print(art);
+    //art = await audioQuery.getArtwork(type: ResourceType.ALBUM, id: album.id);
   }
 
   @override
@@ -54,40 +53,36 @@ class _TracksState extends State<Tracks> {
                 ])),
           ),
         ),
-        body: ListView.builder(
-            itemCount: songs.length,
-            itemBuilder: (context, int index) {
-              return ListTile(
-                leading: Icon(Icons.account_balance),
-                title: Text(songs[index].displayName),
-                onTap: () {
-                  url = null;
-                  setState(() {
-                    url = songs[index].uri;
-                    print(url);
-                  });
-
-                  playAudio(url);
-                  setState(() {
-                    isPlaying = true;
-                  });
-                },
-              );
-            }),
+        body: Container(
+          width: MediaQuery.of(context).size.width,
+          height: MediaQuery.of(context).size.height,
+          child: ListView.builder(
+              itemCount: songs.length,
+              itemBuilder: (context, int index) {
+                return ListTile(
+                  leading: Icon(Icons.account_balance),
+                  title: Text(songs[index].displayName),
+                  onTap: () {
+                    url = null;
+                    setState(() {
+                      url = songs[index].uri;
+                    });
+                    /*assetsAudioPlayer.open(
+                    Audio.file(url),
+                    );*/
+                    playAudio(url);
+                    setState(() {
+                      return isPlaying = true;
+                    });
+                  },
+                );
+              }),
+        ),
       );
     } else {
-      return Center(
-        child: Column(
-          children: [
-            CircularProgressIndicator(),
-            IconButton(
-                icon: Icon(Icons.refresh),
-                onPressed: () {
-                  setState(() {
-                    gotpath = true;
-                  });
-                })
-          ],
+      return Scaffold(
+        body: Center(
+          child: Image.asset('images/2.gif'),
         ),
       );
     }

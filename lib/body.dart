@@ -1,11 +1,9 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
-import 'tracks.dart';
 
 AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
 bool isPlaying = false;
-var status;
 
 pauseAudio() async {
   await assetsAudioPlayer.pause();
@@ -33,10 +31,6 @@ playAudio(url) async {
   );
 }
 
-playAudioFromLocalStorage(path) async {
-  await assetsAudioPlayer.open(path);
-}
-
 class Body extends StatefulWidget {
   @override
   _BodyState createState() => _BodyState();
@@ -59,33 +53,26 @@ class _BodyState extends State<Body> {
               height: 300.0,
               child: Center(
                 child: AvatarGlow(
-                  glowColor: Colors.red[200],
+                  glowColor: Colors.black87,
                   endRadius: 150.0,
                   child: Material(
-                    elevation: 30.0,
+                    elevation: 80.0,
                     shape: CircleBorder(),
                     child: CircleAvatar(
                       radius: 90,
                       backgroundImage: AssetImage(
-                        'images/a.jpg',
+                        'images/c.gif',
                       ),
                     ),
                   ),
                 ),
               ),
             ),
-            //play pause next prev
+            //local
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IconButton(
-                    icon: Icon(Icons.arrow_back_ios),
-                    onPressed: () {
-                      setState(() {
-                        isPlaying = true;
-                      });
-                    }),
+                Text('Local Music:'),
                 IconButton(
                     icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
                     onPressed: () {
@@ -104,31 +91,77 @@ class _BodyState extends State<Body> {
                       }
                     }),
                 IconButton(
-                    icon: Icon(Icons.arrow_forward_ios),
+                    icon: Icon(Icons.stop),
                     onPressed: () {
-                      nextAudio();
-                      setState(() {
-                        isPlaying = true;
-                      });
+                      stopAudio();
+                      return isPlaying = false;
                     }),
+                IconButton(
+                  icon: Icon(Icons.list),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/tracks');
+                  },
+                )
               ],
             ),
-            //stop list
+            //asset
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                Text('Asset Music:'),
+                IconButton(
+                    icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
+                    onPressed: () {
+                      if (isPlaying == true) {
+                        pauseAudio();
+
+                        setState(() {
+                          isPlaying = false;
+                        });
+                      } else {
+                        resumeAudio();
+
+                        setState(() {
+                          isPlaying = true;
+                        });
+                      }
+                    }),
                 IconButton(
                     icon: Icon(Icons.stop),
                     onPressed: () {
                       stopAudio();
+                      return isPlaying = false;
+                    }),
+              ],
+            ),
+            //network
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Network Music:'),
+                IconButton(
+                    icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
+                    onPressed: () {
+                      if (isPlaying == true) {
+                        pauseAudio();
+
+                        setState(() {
+                          isPlaying = false;
+                        });
+                      } else {
+                        resumeAudio();
+
+                        setState(() {
+                          isPlaying = true;
+                        });
+                      }
                     }),
                 IconButton(
-                  icon: Icon(Icons.list),
-                  onPressed: () async {
-                    status = await Navigator.pushNamed(context, '/tracks');
-                  },
-                )
+                    icon: Icon(Icons.stop),
+                    onPressed: () {
+                      stopAudio();
+                      return isPlaying = false;
+                    }),
               ],
             )
           ],
