@@ -31,12 +31,13 @@ playAudio(url) async {
   );
 }
 
-playAssetAudio()async{
-  await assetsAudioPlayer.open(Audio('assets/audio/Blink182.mp3'));
+playAssetAudio() {
+  assetsAudioPlayer.open(Audio('assets/audio/Blink182.mp3'));
 }
 
-playNetAudio()async{
-  await assetsAudioPlayer.open(Audio.network('https://raw.githubusercontent.com/kevkanae/test/master/Krewella%20-%20Greenlights%20(Official%20Music%20Video)%20(%20160kbps%20).mp3'));
+playNetAudio() async {
+  await assetsAudioPlayer.open(Audio.network(
+      'https://raw.githubusercontent.com/kevkanae/test/master/Krewella%20-%20Greenlights%20(Official%20Music%20Video)%20(%20160kbps%20).mp3'));
 }
 
 class Body extends StatefulWidget {
@@ -81,6 +82,15 @@ class _BodyState extends State<Body> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text('Local Music:'),
+                FlatButton(
+                    onPressed: () async {
+                      stat = await Navigator.pushNamed(context, '/tracks');
+                      print(stat);
+                      setState(() {
+                        isPlaying = stat;
+                      });
+                    },
+                    child: Text('S E L E C T')),
                 IconButton(
                     icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
                     onPressed: () {
@@ -105,12 +115,7 @@ class _BodyState extends State<Body> {
                       assetsAudioPlayer.dispose();
                       return isPlaying = false;
                     }),
-                IconButton(
-                  icon: Icon(Icons.list),
-                  onPressed: () async {
-                    stat = await Navigator.pushNamed(context, '/tracks');
-                  },
-                )
+
               ],
             ),
             //asset
@@ -120,7 +125,7 @@ class _BodyState extends State<Body> {
                 Text('Asset Music:'),
                 IconButton(
                     icon: Icon(assetPlay ? Icons.pause : Icons.play_arrow),
-                    onPressed: (){
+                    onPressed: () {
                       if (assetPlay == true) {
                         pauseAudio();
 
@@ -173,9 +178,9 @@ class _BodyState extends State<Body> {
                     onPressed: () {
                       stopAudio();
                       assetsAudioPlayer.dispose();
-                     setState(() {
-                       netPlay = false;
-                     });
+                      setState(() {
+                        netPlay = false;
+                      });
                     }),
               ],
             )
