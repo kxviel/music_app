@@ -19,20 +19,14 @@ fab() {
                       SizedBox(
                         height: 28.0,
                       ),
-                      FlatButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/favs');
-                          },
-                          child: Text('F A V O R I T E S')),
-                      SizedBox(
-                        height: 28.0,
-                      ),
+
+
                       FlatButton(
                           splashColor: Colors.teal[300],
                           onPressed: () {
-                            Navigator.pushNamed(context, '/playlist');
+                            Navigator.pushNamed(context, '/video');
                           },
-                          child: Text('P L A Y L I S T S'))
+                          child: Text('V I D E O'))
                     ],
                   ))
         ],

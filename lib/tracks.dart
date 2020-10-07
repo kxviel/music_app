@@ -42,6 +42,17 @@ class _TracksState extends State<Tracks> {
       return Scaffold(
         appBar: AppBar(
           title: Text('Tracks'),
+          flexibleSpace: Container(
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: <Color>[
+                  Colors.teal[600],
+                  Colors.teal[500],
+                  Colors.teal[300]
+                ])),
+          ),
         ),
         body: ListView.builder(
             itemCount: songs.length,
@@ -53,6 +64,7 @@ class _TracksState extends State<Tracks> {
                   url = null;
                   setState(() {
                     url = songs[index].uri;
+                    print(url);
                   });
 
                   playAudio(url);

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'Vids.dart';
 import 'tracks.dart';
-import 'favorites.dart';
-import 'playlist.dart';
 import 'fab.dart';
 import 'body.dart';
 
@@ -19,8 +18,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       routes: {
         '/tracks': (context) => Tracks(),
-        '/favs': (context) => Favorites(),
-        '/playlist': (context) => Playlist(),
+        '/video': (context) => Video(),
       },
       home: Scaffold(
         appBar: AppBar(
@@ -46,7 +44,6 @@ class _MyAppState extends State<MyApp> {
             backgroundColor: Colors.teal[200],
             foregroundColor: Colors.teal[900],
             splashColor: Colors.teal[500],
-            hoverColor: Colors.teal[500],
             onPressed: () {
               showModalBottomSheet(
                   context: context,
