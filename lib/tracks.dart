@@ -63,17 +63,16 @@ class _TracksState extends State<Tracks> {
                   leading: Icon(Icons.account_balance),
                   title: Text(songs[index].displayName),
                   onTap: () {
+
                     url = null;
                     setState(() {
                       url = songs[index].uri;
                     });
-                    /*assetsAudioPlayer.open(
-                    Audio.file(url),
-                    );*/
                     playAudio(url);
                     setState(() {
                       return isPlaying = true;
                     });
+                    Navigator.pop(context,isPlaying);
                   },
                 );
               }),
@@ -81,6 +80,7 @@ class _TracksState extends State<Tracks> {
       );
     } else {
       return Scaffold(
+        backgroundColor: Colors.black,
         body: Center(
           child: Image.asset('images/2.gif'),
         ),

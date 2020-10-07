@@ -2,9 +2,9 @@ import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 
-AssetsAudioPlayer assetsAudioPlayer = AssetsAudioPlayer();
-bool isPlaying = false;
-
+final assetsAudioPlayer = AssetsAudioPlayer();
+bool isPlaying = false, assetPlay = false, netPlay = false;
+var stat;
 pauseAudio() async {
   await assetsAudioPlayer.pause();
 }
@@ -29,6 +29,14 @@ playAudio(url) async {
   assetsAudioPlayer.open(
     Audio.file(url),
   );
+}
+
+playAssetAudio()async{
+  await assetsAudioPlayer.open(Audio('assets/audio/Blink182.mp3'));
+}
+
+playNetAudio()async{
+  await assetsAudioPlayer.open(Audio.network('https://raw.githubusercontent.com/kevkanae/test/master/Krewella%20-%20Greenlights%20(Official%20Music%20Video)%20(%20160kbps%20).mp3'));
 }
 
 class Body extends StatefulWidget {
@@ -94,12 +102,13 @@ class _BodyState extends State<Body> {
                     icon: Icon(Icons.stop),
                     onPressed: () {
                       stopAudio();
+                      assetsAudioPlayer.dispose();
                       return isPlaying = false;
                     }),
                 IconButton(
                   icon: Icon(Icons.list),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/tracks');
+                  onPressed: () async {
+                    stat = await Navigator.pushNamed(context, '/tracks');
                   },
                 )
               ],
@@ -110,19 +119,19 @@ class _BodyState extends State<Body> {
               children: [
                 Text('Asset Music:'),
                 IconButton(
-                    icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
-                    onPressed: () {
-                      if (isPlaying == true) {
+                    icon: Icon(assetPlay ? Icons.pause : Icons.play_arrow),
+                    onPressed: (){
+                      if (assetPlay == true) {
                         pauseAudio();
 
                         setState(() {
-                          isPlaying = false;
+                          assetPlay = false;
                         });
                       } else {
-                        resumeAudio();
+                        playAssetAudio();
 
                         setState(() {
-                          isPlaying = true;
+                          assetPlay = true;
                         });
                       }
                     }),
@@ -130,7 +139,10 @@ class _BodyState extends State<Body> {
                     icon: Icon(Icons.stop),
                     onPressed: () {
                       stopAudio();
-                      return isPlaying = false;
+                      assetsAudioPlayer.dispose();
+                      setState(() {
+                        assetPlay = false;
+                      });
                     }),
               ],
             ),
@@ -140,19 +152,19 @@ class _BodyState extends State<Body> {
               children: [
                 Text('Network Music:'),
                 IconButton(
-                    icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow),
+                    icon: Icon(netPlay ? Icons.pause : Icons.play_arrow),
                     onPressed: () {
-                      if (isPlaying == true) {
+                      if (netPlay == true) {
                         pauseAudio();
 
                         setState(() {
-                          isPlaying = false;
+                          netPlay = false;
                         });
                       } else {
-                        resumeAudio();
+                        playNetAudio();
 
                         setState(() {
-                          isPlaying = true;
+                          netPlay = true;
                         });
                       }
                     }),
@@ -160,7 +172,10 @@ class _BodyState extends State<Body> {
                     icon: Icon(Icons.stop),
                     onPressed: () {
                       stopAudio();
-                      return isPlaying = false;
+                      assetsAudioPlayer.dispose();
+                     setState(() {
+                       netPlay = false;
+                     });
                     }),
               ],
             )
