@@ -1,3 +1,18 @@
-# music_app
+# Audio Video App
 
-A new Flutter project that fetches music from ur local dir and lets u play it
+A new Flutter project that fetches music from your local dir and lets you play it
+| Milestones                     | Progress |
+| ------------------------------ | -------- |
+| Audio | ✔        |
+| Video                 | ❌        |
+---
+ScreenShots
+---
+  <table>
+    <tr>
+      <td><img src="https://raw.githubusercontent.com/kevkanae/music_app/master/extra/1.png" alt="App SS" width="300" height="550" /></td>
+      <td><img src="https://raw.githubusercontent.com/kevkanae/music_app/master/extra/2.png" alt="App SS" width="300" height="550" /></td>
+    </tr>
+  </table>
+  
+---
