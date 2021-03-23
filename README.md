@@ -10,8 +10,8 @@ ScreenShots
 ---
   <table>
     <tr>
-      <td><img src="https://raw.githubusercontent.com/kevkanae/music_app/master/extra/1.png" alt="App SS" width="300" height="550" /></td>
-      <td><img src="https://raw.githubusercontent.com/kevkanae/music_app/master/extra/2.png" alt="App SS" width="300" height="550" /></td>
+      <td><img src="https://raw.githubusercontent.com/kevkanae/music_app/master/extra/1.png" alt="App SS" width="300" height="600" /></td>
+      <td><img src="https://raw.githubusercontent.com/kevkanae/music_app/master/extra/2.png" alt="App SS" width="300" height="600" /></td>
     </tr>
   </table>
   
